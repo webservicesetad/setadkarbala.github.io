@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> انبار امام خسن (س)</title>
+  <style>
+    /* Reset and base styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e7f0ec, #f8fdf8);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #333;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      padding: 40px 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .container:hover {
+      transform: translateY(-5px);
+    }
+
+    .logo img {
+      max-width: 180px;
+      margin-bottom: 25px;
+    }
+
+    .button {
+      position: relative;
+      display: inline-block;
+      background: #22590f;
+      color: white;
+      font-size: 18px;
+      padding: 14px 26px;
+      border-radius: 50px;
+      text-decoration: none;
+      overflow: hidden;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    .button:hover {
+      background: #1a460c;
+    }
+
+    .button::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .button:active::after {
+      width: 200%;
+      height: 200%;
+    }
+
+    .contact-info, .directions {
+      margin-top: 30px;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .contact-info a {
+      color: #0073aa;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-info a:hover {
+      color: #004b75;
+    }
+
+    .notification {
+      position: fixed;
+      top: 30px;
+      right: 30px;
+      background: #4caf50;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: 1000;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .notification.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .button {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://setadkarbala.wordpress.com/wp-content/uploads/2024/07/logo-setad.png" alt="Setad Logo">
+    </div>
+
+    <!-- Google Maps Button -->
+    <a class="button" id="locationBtn" href="https://maps.app.goo.gl/sbWk3zcYLdopMSGv6" target="_blank" rel="noopener">
+      📍 لوكیشن گوگل
+    </a>
+
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <strong>📞 شماره انباردار (سعد):</strong><br>
+      <a href="tel:07714289445" id="copyPhone">07714289445</a>
+    </div>
+
+    <!-- Address -->
+    <div class="directions">
+      <p><strong>📍 العنوان:</strong><br>
+      طريق النجف كربلاء رابط علوة المخضر الجديده (شارع الرابط مقابل عمود 1182)، بين شركه الكفيل و مجمع العباس (ع) السكني</p>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div class="notification" id="notification"></div>
+
+  <script>
+    // Show popup when clicking location
+    document.getElementById('locationBtn').addEventListener('click', function () {
+      showNotification('📍 جارٍ فتح خريطة جوجل...');
+    });
+
+    // Click to copy phone number
+    document.getElementById('copyPhone').addEventListener('click', function (e) {
+      e.preventDefault();
+      const phone = this.textContent.trim();
+      navigator.clipboard.writeText(phone).then(() => {
+        showNotification('✅ تم نسخ الرقم إلى الحافظة');
+      });
+    });
+
+    // Notification logic
+    function showNotification(message) {
+      const notify = document.getElementById('notification');
+      notify.textContent = message;
+      notify.classList.add('show');
+      setTimeout(() => {
+        notify.classList.remove('show');
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
